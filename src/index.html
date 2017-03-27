@@ -13,16 +13,16 @@
           <tr>
             <th>Product Name</th>
             <th>Quantity</th>
-            <th>{{shopularCtrl.wordConverter('Color')}}</th>
+            <th>{{shopularCtrl.wordTranslator('Color')}}</th>
             <th>Price</th>
           </tr>
         </thead>
         <tbody>
           <tr ng-repeat='item in shopularCtrl.inventory'>
-            <td>{{shopularCtrl.wordConverter(item.name)}}</td>
+            <td>{{shopularCtrl.wordTranslator(item.name)}}</td>
             <td>{{item.quantity}}</td>
             <td>{{item.color}}</td>
-            <td><img ng-show='item.discount' class='discount-image' src='images/discount.png'/> {{shopularCtrl.formatPrice(item) | currency:shopularCtrl.currencySymbol}}</td>
+            <td><img ng-show='item.discount' class='discount-image' src='images/discount.png'/> {{shopularCtrl.formattedPrice(item) | currency:shopularCtrl.currencySymbol}}</td>
           </tr>
         </tbody>
       </table><br>

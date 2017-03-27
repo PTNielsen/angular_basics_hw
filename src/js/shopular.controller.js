@@ -4,6 +4,9 @@
   angular.module('shopular')
     .controller('ShopularController', ShopularController);
 
+  /**
+   *  Constructor function for ShopularController
+   */
   function ShopularController() {
     this.country         = 'US';
     this.currencySymbol  = 'USD$';
@@ -28,11 +31,21 @@
       { "id": 683, "name": "pillow", "price": 27, "quantity": 10, "color": "black", "discount": 12 }
     ];
 
-    this.formatPrice = function formatPrice(item) {
-      return (this.priceConverter(item.price) - this.priceConverter(item.discount)) * (1 + this.taxRate)
+    /**
+     *  Properly formats price, factoring in the discount and tax
+     *  @param  {Object} item Single object from inventory array
+     *  @return {Number}      Number after subtracting discount and calculating tax
+     */
+    this.formattedPrice = function formattedPrice(item) {
+      return (this.numberConverter(item.price) - this.numberConverter(item.discount)) * (1 + this.taxRate)
     }
 
-    this.priceConverter = function priceConverter(amount) {
+    /**
+     *  Converts price based on whether we're displaying dollar or pounds
+     *  @param  {Number} amount The number to be converted
+     *  @return {Number}        Returns the converted number or the number itself 
+     */
+    this.numberConverter = function numberConverter(amount) {
       if (this.country === 'US') {
         return amount;
       } else {
@@ -40,10 +53,18 @@
       }
     }
 
-    this.wordConverter = function wordConverter(word) {
+    /**
+     *  Converts word if there is an associated translation
+     *  @param  {String} word The word to be translated
+     *  @return {String}      Returns the translated word or the word itself
+     */
+    this.wordTranslator = function wordTranslator(word) {
       return this.country === 'UK' && this.translations[word] || word;
     }
 
+    /**
+     *  Changes the country and currencySymbol attribute of the controller
+     */
     this.changeCountry = function changeCountry() {
       if (this.country === 'US'){
         this.country        = 'UK';
