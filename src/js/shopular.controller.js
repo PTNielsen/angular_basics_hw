@@ -5,14 +5,14 @@
     .controller('ShopularController', ShopularController);
 
   function ShopularController() {
-    this.country         = 'US'
-    this.currencySymbol  = 'USD$'
+    this.country         = 'US';
+    this.currencySymbol  = 'USD$';
     this.taxRate         = 0.0575;
     this.translations    = {
       "waste basket": "rubbish bin",
       "Color": "Colour",
       "color": "colour"
-    }
+    };
     this.inventory = [
       { "id": 2957, "name": "widget", "price": 32, "quantity": 203, "color": "red", "discount": 31 },
       { "id": 89274, "name": "golf club", "price": 98, "quantity": 10, "color": "black", "discount": 0 },
