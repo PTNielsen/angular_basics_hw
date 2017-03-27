@@ -1,0 +1,39 @@
+#inventory-table {
+  width: 80%;
+  margin: auto;
+}
+
+tbody tr:nth-child(odd) {
+  background-color: #EEEEEE;
+}
+
+tr th {
+  text-align: left;
+}
+
+th:not(:first-child) {
+  text-align: right;
+}
+
+td {
+  height: 30px;
+}
+
+td:not(:first-child) {
+  text-align: right;
+}
+
+.discount-image {
+  height: 20px;
+  width: 20px;
+}
+
+footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  background-color: #EFEFEF;
+  text-align: center;
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang='en' ng-app='shopular'>
+  <head>
+    <meta charset='utf-8'>
+    <title>Angular Basics HW</title>
+    <link rel="stylesheet" type="text/css" href="/style/index.css">
+  </head>
+  <body>
+    <h1>Shopular Stuff</h1>
+    <main ng-controller='ShopularController as shopularCtrl'>
+      <table id='inventory-table'>
+        <thead>
+          <tr>
+            <th>Product Name</th>
+            <th>Quantity</th>
+            <th>{{shopularCtrl.wordConverter('Color')}}</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat='item in shopularCtrl.inventory'>
+            <td>{{shopularCtrl.wordConverter(item.name)}}</td>
+            <td>{{item.quantity}}</td>
+            <td>{{item.color}}</td>
+            <td><img ng-show='item.discount' class='discount-image' src='images/discount.png'/> {{shopularCtrl.formatPrice(item) | currency:shopularCtrl.currencySymbol}}</td>
+          </tr>
+        </tbody>
+      </table><br>
+      <button ng-click="shopularCtrl.changeCountry()">Change Country</button>
+    </main>
+
+    <footer>
+      PTNielsen &copy;
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script src="/js/shopular.module.js"></script>
+    <script src="/js/shopular.controller.js"></script>
+  </body>
+</html>
