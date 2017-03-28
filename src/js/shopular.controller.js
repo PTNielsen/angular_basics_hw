@@ -4,19 +4,25 @@
   angular.module('shopular')
     .controller('ShopularController', ShopularController);
 
+  // No need to potentially create the taxRate variable in multiple instances
+  // of ShopularController.  We can create outside the constructor function
+  // and still reference inside.
+  let taxRate = 0.0575;
+
   /**
    *  Constructor function for ShopularController
    */
   function ShopularController() {
-    this.country         = 'US';
-    this.currencySymbol  = 'USD$';
-    this.taxRate         = 0.0575;
-    this.translations    = {
+    let vm = this
+    vm.country         = 'US';
+    vm.currencySymbol  = 'USD$';
+    vm.taxRate         = taxRate;
+    vm.translations    = {
       "waste basket": "rubbish bin",
       "Color": "Colour",
       "color": "colour"
     };
-    this.inventory = [
+    vm.inventory = [
       { "id": 2957, "name": "widget", "price": 32, "quantity": 203, "color": "red", "discount": 31 },
       { "id": 89274, "name": "golf club", "price": 98, "quantity": 10, "color": "black", "discount": 0 },
       { "id": 64, "name": "iPhone", "price": 499, "quantity": 2, "color": "white", "discount": 0 },
@@ -36,8 +42,8 @@
      *  @param  {Object} item Single object from inventory array
      *  @return {Number}      Number after subtracting discount and calculating tax
      */
-    this.formattedPrice = function formattedPrice(item) {
-      return (this.numberConverter(item.price) - this.numberConverter(item.discount)) * (1 + this.taxRate)
+    vm.formattedPrice = function formattedPrice(item) {
+      return (vm.numberConverter(item.price) - vm.numberConverter(item.discount)) * (1 + vm.taxRate)
     }
 
     /**
@@ -45,8 +51,8 @@
      *  @param  {Number} amount The number to be converted
      *  @return {Number}        Returns the converted number or the number itself 
      */
-    this.numberConverter = function numberConverter(amount) {
-      if (this.country === 'US') {
+    vm.numberConverter = function numberConverter(amount) {
+      if (vm.country === 'US') {
         return amount;
       } else {
         return amount * 1.5;
@@ -58,20 +64,20 @@
      *  @param  {String} word The word to be translated
      *  @return {String}      Returns the translated word or the word itself
      */
-    this.wordTranslator = function wordTranslator(word) {
-      return this.country === 'UK' && this.translations[word] || word;
+    vm.wordTranslator = function wordTranslator(word) {
+      return vm.country === 'UK' && vm.translations[word] || word;
     }
 
     /**
      *  Changes the country and currencySymbol attribute of the controller
      */
-    this.changeCountry = function changeCountry() {
-      if (this.country === 'US'){
-        this.country        = 'UK';
-        this.currencySymbol = 'GBP£';
+    vm.changeCountry = function changeCountry() {
+      if (vm.country === 'US'){
+        vm.country        = 'UK';
+        vm.currencySymbol = 'GBP£';
       } else {
-        this.country        = 'US';
-        this.currencySymbol = 'USD$';
+        vm.country        = 'US';
+        vm.currencySymbol = 'USD$';
       }
     }
   }
